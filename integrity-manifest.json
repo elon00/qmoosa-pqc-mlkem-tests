@@ -1,6 +1,6 @@
 {
   "mission": "QMOOSA-PQC-MLKEM-01",
-  "generatedAt": "2026-10-19T01:25:00Z",
+  "generatedAt": "2026-10-19T01:58:00Z",
   "packages": [
     {
       "name": "@qmoosa/pqc-mlkem-protocol",
@@ -14,17 +14,17 @@
       "name": "@qmoosa/pqc-mlkem-engine",
       "version": "1.0.0",
       "repository": "elon00/qmoosa-pqc-mlkem-engine",
-      "sourceCommit": "f8e5815464f70755f167fe185e9663e89a0d9f16",
+      "sourceCommit": "10d9c785038062c7ce728cccca8f3264f36d4f97",
       "archivePath": "packages/qmoosa-pqc-mlkem-engine-1.0.0.tgz",
-      "sha256": "60cc76a056f531882ef8ec7e40d0eed3e2a5d53ba61cb8711f1d017d2008c30b"
+      "sha256": "ca53cbc8fec1baa15c79dc5b3c3e53aa04280066d26838e36b0e46d97b8850c8"
     },
     {
       "name": "@qmoosa/pqc-mlkem-sdk",
       "version": "1.0.0",
       "repository": "elon00/qmoosa-pqc-mlkem-sdk",
-      "sourceCommit": "4cb4a8f44c83a5b451ac22c74c0b97729568cd02",
+      "sourceCommit": "37fff8e3c77e938ba48111b9a6035928678c50c7",
       "archivePath": "packages/qmoosa-pqc-mlkem-sdk-1.0.0.tgz",
-      "sha256": "37d80693e3f34ad459bdbd4cc22b0c1f9e6e9aef315b1d5b87d784c4a990a928"
+      "sha256": "300e85b25aa903e671bec43c1398fd867e3e695d9b94bdc93e15f25a18a17180"
     }
   ]
 }

@@ -26,14 +26,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: elon00/qmoosa-pqc-mlkem-engine
-          ref: f8e5815464f70755f167fe185e9663e89a0d9f16
+          ref: 10d9c785038062c7ce728cccca8f3264f36d4f97
           path: qmoosa-pqc-mlkem-engine
 
       - name: Checkout sdk repository (Pinned Commit)
         uses: actions/checkout@v4
         with:
           repository: elon00/qmoosa-pqc-mlkem-sdk
-          ref: 4cb4a8f44c83a5b451ac22c74c0b97729568cd02
+          ref: 37fff8e3c77e938ba48111b9a6035928678c50c7
           path: qmoosa-pqc-mlkem-sdk
 
       - name: Setup Node.js
