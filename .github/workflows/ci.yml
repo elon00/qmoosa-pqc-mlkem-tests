@@ -1,0 +1,85 @@
+name: Full-Spectrum Post-Quantum Reality Gates & Invariant CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  reality-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tests repository
+        uses: actions/checkout@v4
+        with:
+          path: qmoosa-pqc-mlkem-tests
+
+      - name: Checkout protocol repository (Pinned Commit)
+        uses: actions/checkout@v4
+        with:
+          repository: elon00/qmoosa-pqc-mlkem-protocol
+          ref: ba2ee330c7457097f686723de87984b3008da0fd
+          path: qmoosa-pqc-mlkem-protocol
+
+      - name: Checkout engine repository (Pinned Commit)
+        uses: actions/checkout@v4
+        with:
+          repository: elon00/qmoosa-pqc-mlkem-engine
+          ref: f8e5815464f70755f167fe185e9663e89a0d9f16
+          path: qmoosa-pqc-mlkem-engine
+
+      - name: Checkout sdk repository (Pinned Commit)
+        uses: actions/checkout@v4
+        with:
+          repository: elon00/qmoosa-pqc-mlkem-sdk
+          ref: 4cb4a8f44c83a5b451ac22c74c0b97729568cd02
+          path: qmoosa-pqc-mlkem-sdk
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: qmoosa-pqc-mlkem-tests/package.json
+
+      - name: Install dependencies in sibling repositories
+        run: |
+          npm ci --prefix qmoosa-pqc-mlkem-protocol
+          npm ci --prefix qmoosa-pqc-mlkem-engine
+          npm ci --prefix qmoosa-pqc-mlkem-sdk
+
+      - name: Install dependencies in tests repository
+        working-directory: qmoosa-pqc-mlkem-tests
+        run: |
+          npm install
+          mkdir -p node_modules/@qmoosa/pqc-mlkem-protocol
+          mkdir -p node_modules/@qmoosa/pqc-mlkem-engine
+          mkdir -p node_modules/@qmoosa/pqc-mlkem-sdk
+          tar -xzf packages/qmoosa-pqc-mlkem-protocol-1.0.0.tgz -C node_modules/@qmoosa/pqc-mlkem-protocol --strip-components=1
+          tar -xzf packages/qmoosa-pqc-mlkem-engine-1.0.0.tgz -C node_modules/@qmoosa/pqc-mlkem-engine --strip-components=1
+          tar -xzf packages/qmoosa-pqc-mlkem-sdk-1.0.0.tgz -C node_modules/@qmoosa/pqc-mlkem-sdk --strip-components=1
+
+      - name: Run Source & Package Integrity Gate (Archive Mode)
+        working-directory: qmoosa-pqc-mlkem-tests
+        run: npm run verify:archive
+
+      - name: Run Strict Current-HEAD Alignment Gate
+        working-directory: qmoosa-pqc-mlkem-tests
+        run: npm run verify:current-head
+
+      - name: Run Hermetic Source Derivation & Canonical Artifact Comparison Gate
+        working-directory: qmoosa-pqc-mlkem-tests
+        run: npm run verify:source
+
+      - name: Run Integration Tests
+        working-directory: qmoosa-pqc-mlkem-tests
+        run: npm run test:integration
+
+      - name: Run Adversarial Negative Control Suite
+        working-directory: qmoosa-pqc-mlkem-tests
+        run: npm run test:negative
+
+      - name: Static Lint Check
+        working-directory: qmoosa-pqc-mlkem-tests
+        run: npm run lint
