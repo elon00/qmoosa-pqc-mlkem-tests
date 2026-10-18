@@ -40,19 +40,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
-          cache-dependency-path: qmoosa-pqc-mlkem-tests/package.json
 
       - name: Install dependencies in sibling repositories
         run: |
-          npm ci --prefix qmoosa-pqc-mlkem-protocol
-          npm ci --prefix qmoosa-pqc-mlkem-engine
-          npm ci --prefix qmoosa-pqc-mlkem-sdk
+          npm install --prefix qmoosa-pqc-mlkem-protocol
+          npm install --prefix qmoosa-pqc-mlkem-engine
+          npm install --prefix qmoosa-pqc-mlkem-sdk
 
       - name: Install dependencies in tests repository
         working-directory: qmoosa-pqc-mlkem-tests
         run: |
-          npm install
+          rm -f package-lock.json
+          npm install --no-package-lock
           mkdir -p node_modules/@qmoosa/pqc-mlkem-protocol
           mkdir -p node_modules/@qmoosa/pqc-mlkem-engine
           mkdir -p node_modules/@qmoosa/pqc-mlkem-sdk
