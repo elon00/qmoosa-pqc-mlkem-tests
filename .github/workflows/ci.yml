@@ -11,26 +11,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout tests repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           path: qmoosa-pqc-mlkem-tests
 
       - name: Checkout protocol repository (Pinned Commit)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: elon00/qmoosa-pqc-mlkem-protocol
           ref: ba2ee330c7457097f686723de87984b3008da0fd
           path: qmoosa-pqc-mlkem-protocol
 
       - name: Checkout engine repository (Pinned Commit)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: elon00/qmoosa-pqc-mlkem-engine
           ref: 10d9c785038062c7ce728cccca8f3264f36d4f97
           path: qmoosa-pqc-mlkem-engine
 
       - name: Checkout sdk repository (Pinned Commit)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: elon00/qmoosa-pqc-mlkem-sdk
           ref: 37fff8e3c77e938ba48111b9a6035928678c50c7
